@@ -9,6 +9,11 @@ on:
   pull_request:
     branches: [main]
 
+# Permissões necessárias para upload SARIF ao GitHub Security
+permissions:
+  contents: read
+  security-events: write
+
 jobs:
   # ============================================
   # JOB: Lint Dockerfile com Hadolint
@@ -62,7 +67,7 @@ jobs:
           output: 'trivy-image-results.sarif'
 
       - name: 📤 Upload SARIF
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: always()
         with:
           sarif_file: 'trivy-image-results.sarif'

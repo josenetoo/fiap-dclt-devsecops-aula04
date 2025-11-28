@@ -186,6 +186,13 @@ aws ecr describe-image-scan-findings \
 
 **Editar `.github/workflows/security.yml`:**
 
+> ⚠️ **Importante**: Adicione as permissões no início do workflow (após o `on:`) para o SARIF upload funcionar:
+> ```yaml
+> permissions:
+>   contents: read
+>   security-events: write
+> ```
+
 **Linux/Mac:**
 ```bash
 cat >> .github/workflows/security.yml << 'EOF'
@@ -225,7 +232,7 @@ cat >> .github/workflows/security.yml << 'EOF'
           output: 'trivy-image-results.sarif'
 
       - name: 📤 Upload SARIF
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: always()
         with:
           sarif_file: 'trivy-image-results.sarif'
