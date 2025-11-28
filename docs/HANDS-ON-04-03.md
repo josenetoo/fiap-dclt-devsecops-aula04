@@ -110,10 +110,17 @@ resource "aws_security_group" "web" {
 
 ### Passo 5: Instalar Checkov
 
-**Linux/Mac:**
+**Mac (Homebrew):**
 ```bash
-# Via pip
-pip install checkov
+brew install checkov
+
+# Verificar
+checkov --version
+```
+
+**Linux:**
+```bash
+pip3 install checkov
 
 # Verificar
 checkov --version
@@ -121,7 +128,6 @@ checkov --version
 
 **Windows (PowerShell):**
 ```powershell
-# Via pip
 pip install checkov
 
 # Verificar
@@ -330,7 +336,7 @@ cat >> .github/workflows/security.yml << 'EOF'
           soft_fail: true  # Não falha o pipeline (para demo)
 
       - name: 📤 Upload SARIF
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: always()
         with:
           sarif_file: checkov-results.sarif
