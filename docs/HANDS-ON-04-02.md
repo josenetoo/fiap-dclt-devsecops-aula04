@@ -285,16 +285,4 @@ Se você usou SARIF upload:
 
 ---
 
-## ✅ Checkpoint
-
-Ao final deste vídeo você deve ter:
-
-- [ ] Entender importância do scan de imagens
-- [ ] Trivy image scan executado localmente
-- [ ] ECR scan on push habilitado
-- [ ] Job Trivy Image no pipeline
-- [ ] SARIF enviado para GitHub Security
-
----
-
 **FIM DO VÍDEO 4.2** ✅

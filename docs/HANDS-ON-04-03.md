@@ -379,19 +379,6 @@ git push origin main
 
 ---
 
-## ✅ Checkpoint
-
-Ao final deste vídeo você deve ter:
-
-- [ ] Entender riscos de IaC inseguro
-- [ ] Checkov instalado
-- [ ] Identificar problemas no Terraform
-- [ ] Conhecer versão segura
-- [ ] Job Checkov no pipeline
-- [ ] Findings no GitHub Security
-
----
-
 ## 📖 Leitura Complementar
 
 - [Checkov Documentation](https://www.checkov.io/)

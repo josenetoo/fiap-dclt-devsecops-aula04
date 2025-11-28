@@ -371,17 +371,4 @@ git push origin main
 
 ---
 
-## ✅ Checkpoint
-
-Ao final deste vídeo você deve ter:
-
-- [ ] Entender problemas de Dockerfiles inseguros
-- [ ] Conhecer multi-stage build
-- [ ] Dockerfile.secure buildado (5x menor)
-- [ ] Verificar que roda como non-root
-- [ ] Hadolint instalado e executado
-- [ ] Job Hadolint no pipeline
-
----
-
 **FIM DO VÍDEO 4.1** ✅
