@@ -1,0 +1,12 @@
+# Hadolint Configuration
+# https://github.com/hadolint/hadolint
+
+ignored:
+  - DL3008  # Pin versions in apt-get (pode ser flexível em dev)
+
+trustedRegistries:
+  - docker.io
+  - gcr.io
+  - public.ecr.aws
+
+failure-threshold: warning

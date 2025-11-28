@@ -1,0 +1,12 @@
+# Dependências da aplicação DevSecOps Lab
+Flask==2.3.0
+Werkzeug==2.3.0
+gunicorn==21.2.0
+
+# AWS SDK para integração com Secrets Manager
+boto3==1.28.0
+
+# Dependências com vulnerabilidades conhecidas (para demonstração SCA)
+# ATENÇÃO: Estas versões são intencionalmente vulneráveis!
+# urllib3==1.25.0  # Descomente para testar SCA
+# Pillow==8.0.0    # Descomente para testar SCA

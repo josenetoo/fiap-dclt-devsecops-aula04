@@ -1,0 +1,17 @@
+# Checkov Configuration
+# https://www.checkov.io/2.Basics/Configuration%20File.html
+
+framework:
+  - terraform
+  - dockerfile
+
+compact: true
+quiet: true
+
+skip-check:
+  # Adicione checks a ignorar (com justificativa!)
+  # - CKV_AWS_18  # S3 logging - not needed for dev
+
+output:
+  - cli
+  - sarif

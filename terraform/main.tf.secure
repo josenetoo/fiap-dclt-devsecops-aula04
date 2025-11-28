@@ -1,0 +1,93 @@
+# ============================================
+# TERRAFORM SEGURO - Boas Práticas
+# Versão corrigida após análise do Checkov
+# ============================================
+
+terraform {
+  required_version = ">= 1.0"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
+provider "aws" {
+  region = "us-east-1"
+}
+
+# ✅ S3 Bucket seguro
+resource "aws_s3_bucket" "data" {
+  bucket = "devsecops-data-bucket-secure"
+  
+  tags = {
+    Environment = "dev"
+    Project     = "devsecops"
+  }
+}
+
+# ✅ Bloquear acesso público
+resource "aws_s3_bucket_public_access_block" "data" {
+  bucket = aws_s3_bucket.data.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+# ✅ Versionamento habilitado
+resource "aws_s3_bucket_versioning" "data" {
+  bucket = aws_s3_bucket.data.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+# ✅ Encryption habilitado
+resource "aws_s3_bucket_server_side_encryption_configuration" "data" {
+  bucket = aws_s3_bucket.data.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+  }
+}
+
+# ✅ Security Group restrito
+resource "aws_security_group" "web" {
+  name        = "web-secure"
+  description = "Web security group - restricted"
+
+  # ✅ Apenas porta 443 (HTTPS)
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.0.0/8"]  # Apenas rede interna
+    description = "HTTPS from internal network"
+  }
+
+  # ✅ Apenas porta 5000 para app
+  ingress {
+    from_port   = 5000
+    to_port     = 5000
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.0.0/8"]
+    description = "App port from internal network"
+  }
+
+  egress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "HTTPS outbound"
+  }
+
+  tags = {
+    Name = "web-secure"
+  }
+}
